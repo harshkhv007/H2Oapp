@@ -1,0 +1,27 @@
+<html>
+        <head>
+                {% if title %}
+                <title> {{ title }} - H2O Application</title>
+                {% else %}
+                <title> Welcome to H2O </title>
+                {% endif %}
+        </head>
+        <body>
+		<div> H2O: <a href="/index">Home</a>
+		<a href="/register">Register</a>
+		<a href="/login">Log In</a></div>
+		<hr>
+		<body>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+						{% for message in messages %}
+							<li> {{ message }} </li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+                {% block content %}{% endblock %}
+        </body>
+</html>
+
