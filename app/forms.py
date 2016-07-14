@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, PasswordField, validators
+from wtforms import StringField, BooleanField, PasswordField, validators, RadioField
 from wtforms.validators import DataRequired
 
 class RegistrationForm(Form):
@@ -14,3 +14,5 @@ class LoginForm(Form):
 	Password = PasswordField('Password', [validators.DataRequired()])
 	remember_me = BooleanField('remember_me', default = False)
 
+class WaterForm(Form):
+	quantity = RadioField('quantity', choices=[('gulp', 'Gulp of Water!'), ('half_bottle', 'Half Bottle!'), ('full_bottle', 'Full Bottle!')])

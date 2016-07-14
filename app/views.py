@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, request, session, url_for, g, session
 from flask.ext.login import login_user, logout_user, current_user, login_required
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, WaterForm
 from app import app, db, lm
 from .models import User
 from flask_mail import Mail, Message
@@ -13,14 +13,34 @@ def index():
 	user = g.user
 	msg = {'message': 'Welcome to the H2O Application'}
 	title = 'Home'
-	return render_template('index.html', user=user,title=title, msg=msg)
+       	return render_template('index.html', user=user,title=title, msg=msg)
 
-@app.route('/email')
+@app.route('/email', methods=['GET','POST'])
 @login_required
 def smail():
-#   user = User.query.filter_by(username=username)
-   send_notification(g.user)
-   return "Sent"
+#	user = User.query.filter_by(username=username)
+	user = g.user
+#	if g.user is not None and g.user.is_authenticated:
+#		return redirect(url_for('index'))
+	form = WaterForm(request.form)
+	for i in form:
+		print i
+	print form.quantity.data
+	if request.method == 'POST': #need to put form.validate()
+		if form.quantity.data == 'gulp':
+			print 'Its a gulp'
+			#send_notification(g.user)
+		if form.quantity.data == 'half_bottle':
+			print 'Its half'
+			#send_notification(g.user)
+		if form.quantity.data == 'full_bottle':
+			print 'Its full'
+			#send_notification(g.user)
+	else:
+		print form.errors
+#	return 'Sent'
+#	send_notification(g.user)
+	return render_template('email.html', user=user)
 #    pass
 
 @app.route('/register', methods=['GET', 'POST'])

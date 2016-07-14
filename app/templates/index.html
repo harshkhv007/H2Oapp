@@ -1,4 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-	<h1>{{ msg.message }}</h1>
+<h1>{{ msg.message }}</h1>
+<div>
+Hello <strong>{{ user.username }}</strong>, This application keeps track of your daily water intake.
+As instructed by various medical experts, water intake at specific time intervals is healthy and a must.
+And the description goes...</br></div>
+
+<div><p>
+<form method="post" action="/email">
+<p>Select the amount of water you drank: 
+<input type="radio" name="quantity" value="gulp">Gulp of Water!
+<input type="radio" name="quantity" value="half_bottle">Half Bottle!
+<input type="radio" name="quantity" value="full_bottle">Full Bottle!
+</p>
+<input type="submit" value="Submit">
+</form>
+</p></div>
+
 {% endblock %}
