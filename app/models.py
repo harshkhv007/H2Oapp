@@ -5,7 +5,6 @@ class User(db.Model):
 	username = db.Column(db.String(64), index=True, unique=True)
 	email = db.Column(db.String(100), index=True, unique=True)
 	password = db.Column(db.String(40), index=True, unique=True)
-#	authenticated = db.Column(db.Boolean, default=False)
 
 	def __init__(self, username, email, password):
 		#super(User, self).__init__(**kwargs)

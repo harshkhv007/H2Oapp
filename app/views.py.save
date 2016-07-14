@@ -4,7 +4,6 @@ from .forms import RegistrationForm, LoginForm
 from app import app, db, lm
 from .models import User
 from flask_mail import Mail, Message
-from .emails import send_notification
 
 @app.route('/')
 @app.route('/index')
@@ -15,18 +14,14 @@ def index():
 	title = 'Home'
 	return render_template('index.html', user=user,title=title, msg=msg)
 
+
 @app.route('/email')
-@login_required
 def smail():
-#   user = User.query.filter_by(username=username)
-   send_notification(g.user)
+   send
    return "Sent"
-#    pass
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-        if g.user is not None and g.user.is_authenticated:
-                return redirect(url_for('index'))
 	form = RegistrationForm(request.form)
 	for i in form:
 		print i

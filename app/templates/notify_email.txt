@@ -1,0 +1,6 @@
+Dear {{ user.username }}
+
+This is test email sent to you from the H2O application. Please take drink water.
+
+Regards,
+The H2O App Team
