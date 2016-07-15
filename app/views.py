@@ -4,7 +4,7 @@ from .forms import RegistrationForm, LoginForm, WaterForm
 from app import app, db, lm
 from .models import User
 from flask_mail import Mail, Message
-from .emails import send_notification
+from .emails import send_notification, timer_set
 
 @app.route('/')
 @app.route('/index')
@@ -20,27 +20,26 @@ def index():
 def smail():
 #	user = User.query.filter_by(username=username)
 	user = g.user
+#	print user
 #	if g.user is not None and g.user.is_authenticated:
 #		return redirect(url_for('index'))
 	form = WaterForm(request.form)
-	for i in form:
-		print i
-	print form.quantity.data
+#	for i in form:
+#		print i
+#	print form.quantity.data
 	if request.method == 'POST': #need to put form.validate()
-		if form.quantity.data == 'gulp':
-			print 'Its a gulp'
-			#send_notification(g.user)
-		if form.quantity.data == 'half_bottle':
-			print 'Its half'
-			#send_notification(g.user)
-		if form.quantity.data == 'full_bottle':
-			print 'Its full'
-			#send_notification(g.user)
+		if form.quantity.data != 'None':
+			timer_set(form.quantity.data, user)
+			#send_notification(g.user, alert)
+			return render_template('thanks.html', user=user)
+		else:
+			flash('Please select a valid amount of water intake')
+			return redirect(url_for('index'))
 	else:
 		print form.errors
 #	return 'Sent'
 #	send_notification(g.user)
-	return render_template('email.html', user=user)
+#	return render_template('email.html', user=user)
 #    pass
 
 @app.route('/register', methods=['GET', 'POST'])
