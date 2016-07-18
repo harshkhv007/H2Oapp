@@ -1,5 +1,5 @@
 WTF_CSRF_ENABLED = True
-SECRET_KEY = 'naa-peru-navvu-idi-na-pani'
+SECRET_KEY = '******************************'
 
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
